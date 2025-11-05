@@ -15,11 +15,12 @@ public class IntArray {
         mergesort(array);
     }
     public double messeMergesortLaufzeit() {
-        // Stoppuhr starten
-        // Mergesort auf array ausführen
-        // Stoppuhr beenden
-        // Die gemessene Zeit zurückgeben
-        return 0.0;
+        Stoppuhr uhr = new Stoppuhr();
+        uhr.start();
+        mergesort(array);
+        uhr.stop();
+        Console.println("Die Zeit beträgt " + uhr.gestoppteZeit() + " Sekunden.");
+        return uhr.gestoppteZeit();
     }
     private void mergesort(int[] pArray) {
         if(pArray.length < 2) {
