@@ -49,6 +49,34 @@ public class Woerterraetsel {
             return erg;
     }
     
+    // ...existing code...
+    public int wortLaenge(int pIndex) {
+        // 1-basierter Index: pIndex = 1 -> erstes Wort im Rätsel-Char-Array.
+        if (raetsel == null || pIndex <= 0) return -1;
+        int gefunden = 0;
+        int aktuellLaenge = 0;
+        for (Character ch : raetsel) {
+            // null im Array = verborgenes Buchstabenfeld -> zählt als Buchstabe
+            if (ch == null || istBuchstabe(ch)) {
+                aktuellLaenge++;
+            } else {
+                // Trennzeichen (z.B. ' ', ',', '.', '!', '?', ';')
+                if (aktuellLaenge > 0) {
+                    gefunden++;
+                    if (gefunden == pIndex) return aktuellLaenge;
+                    aktuellLaenge = 0;
+                }
+            }
+        }
+        // letztes Wort prüfen
+        if (aktuellLaenge > 0) {
+            gefunden++;
+            if (gefunden == pIndex) return aktuellLaenge;
+        }
+        return -1; // Index nicht gefunden
+    }
+// ...existing code...
+
     private void woerterTauschen() {
             if(woerter != null) {
                 Random r = new Random();
@@ -62,7 +90,7 @@ public class Woerterraetsel {
     }
     
     private Character[] generiereRaetsel(String pLoesung) {
-        if(pLoesung == null) return null;
+        if(pLoesung == null) return null xcx, 
         
         Character[] neuesRaetsel = new Character[pLoesung.length()];
         Random r = new Random();
@@ -136,8 +164,11 @@ public class Woerterraetsel {
         if (index == pWoerter.length - 1) {
             pKombinationen.append(pWoerter);
         }
+        if (wortLaenge(index) != pWoerter[index].length()) {
+            index++;
+        }
         
-        for (int i = index; i < pWoerter.length; i++) {
+        for (int i = index; i <= pWoerter.length; i++) {
             tausche(pWoerter, index, i);
             permutiere(pKombinationen, pWoerter.clone(), index + 1);
             tausche(pWoerter, index, i);
