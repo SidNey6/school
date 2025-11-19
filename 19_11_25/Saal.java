@@ -4,6 +4,7 @@ import java.util.Random;
 public class Saal {
     private int nummer;
     private Sitz[][] sitze;
+    private List<Sitz> belegteSitze;
     
     public Saal(int pNummer, int pReihen, int pPlaetze) {
         nummer = pNummer;
@@ -11,6 +12,19 @@ public class Saal {
         for(int i = 0; i < pReihen; i++) {
             for(int j = 0; j < pPlaetze; j++) {
                 sitze[i][j] = new Sitz(i, j);
+            }
+        }
+    }
+
+    public void belegeSitz(Sitz sitz) {
+        if(belegteSitze.isEmpty) {
+                belegteSitze.append(sitz)
+        } else {
+            for(belegteSitze.toFirst(); belegteSitze.hasAccess(); belegteSitze.next()) {
+                if(belegteSitze.getContent().gibPlatz() > sitz.gibPlatz() && belegteSitze.getContent().gibReihe() == sitz.gibReihe()
+                || belegteSitze.getContent().gibReihe() < sitz.gibReihe()) {
+                    belegteSitze.insert(sitz);
+                }
             }
         }
     }
@@ -45,6 +59,7 @@ public class Saal {
         sitze[x][y].setzePerson(pPerson);
         pPerson.sitzHinzufuegen(sitze[x][y]);
     }
+
     public void reserviere(List<Person> pPersonen) {
         int anzahl = gibAnzahlPersonen(pPersonen);
         List<Sitz> freieSitze = gibFreieSitze();
@@ -58,6 +73,10 @@ public class Saal {
                     aktReihe[ersterPlatz].setzePerson(aktPerson);
                     pPersonen.remove();
                     ersterPlatz++;
+
+                    for(belegteSitze.toFirst(); belegteSitze.hasAccess(); belegteSitze.next()) {
+                        
+                    }
                 }
                 return;
             }
