@@ -17,14 +17,14 @@ public class Saal {
     }
 
     public void belegeSitz(Sitz sitz) {
-        if(belegteSitze.isEmpty) {
-                belegteSitze.append(sitz)
+        if(belegteSitze.isEmpty()) {
+                belegteSitze.append(sitz);
         } else {
             for(belegteSitze.toFirst(); belegteSitze.hasAccess(); belegteSitze.next()) {
                 if(belegteSitze.getContent().gibPlatz() > sitz.gibPlatz() && belegteSitze.getContent().gibReihe() == sitz.gibReihe()
-                || belegteSitze.getContent().gibReihe() < sitz.gibReihe()) {
+                || belegteSitze.getContent().gibReihe() > sitz.gibReihe() ) {
                     belegteSitze.insert(sitz);
-                }
+                } else if () { } // wenn man das ans ende tut implementieren
             }
         }
     }
