@@ -7,7 +7,10 @@ public class LKW {
 
     public void beladeLkw(int pAnzahlPakete) {
         for(int i = 0; i < pAnzahlPakete; i++) {
-            inhalt.push(new  Paket((int) (Math.random()*100)));
+            int gewicht = (int) (Math.random() * 100);
+            Paket p = new Paket(gewicht);
+            inhalt.push(p);
+            System.out.println("Generiertes Paket " + i + ": Gewicht=" + gewicht);
         }
     }
 
