@@ -1,3 +1,5 @@
+import Common.Stack;
+
 public class Gabelstapler {
     private Stack<Paket> inhalt = new Stack<Paket>();
     private int maxGewicht;

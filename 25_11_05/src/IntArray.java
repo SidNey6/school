@@ -1,11 +1,11 @@
-import java.lang.Math;
+import Common.Stoppuhr;
 
 public class IntArray {
     private int[] array;
 
 
     public IntArray(int pLength) {
-        array = new array[pLength];
+        array = new int[pLength];
         for(int i = 0; i < pLength; i++) {
             array[i] = (int) Math.random()*1000;
        }
@@ -18,8 +18,8 @@ public class IntArray {
         Stoppuhr uhr = new Stoppuhr();
         uhr.start();
         mergesort(array);
-        uhr.stop();
-        Console.println("Die Zeit beträgt " + uhr.gestoppteZeit() + " Sekunden.");
+        uhr.stopp();
+        System.out.println("Die Zeit beträgt " + uhr.gestoppteZeit() + " Sekunden.");
         return uhr.gestoppteZeit();
     }
     private void mergesort(int[] pArray) {

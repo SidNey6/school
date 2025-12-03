@@ -1,1 +1,34 @@
-*.class
+# --- macOS System Junk ---
+# These are invisible files Mac creates to store folder view settings.
+# You never want these in a shared repo.
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# --- IntelliJ IDEA Settings ---
+# These are your local IDE settings.
+# Excluding the whole .idea folder is the safest option for a student
+# to avoid merge conflicts with your own settings later.
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# --- Java Output ---
+# This is where IntelliJ puts the compiled .class files.
+# You only want source code (.java) on GitHub, not compiled code.
+out/
+classes/
+
+# --- Common Build Tools ---
+# You might not use Maven or Gradle yet, but it's good to have these
+# ignored just in case you switch build systems later.
+target/
+build/
+.gradle/
+.mvn/
+wrapper/
+
+# --- Logs and Crash Dumps ---
+*.log
+hs_err_pid*

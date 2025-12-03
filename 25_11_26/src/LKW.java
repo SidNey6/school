@@ -1,3 +1,5 @@
+import Common.Stack;
+
 public class LKW {
     private Stack<Paket> inhalt;
 

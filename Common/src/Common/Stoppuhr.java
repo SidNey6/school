@@ -1,3 +1,6 @@
+package Common;
+
+
 /*
  * Stoppuhr, um die Laufzeit eines Algorithmus zu messen.
  * Anwendungsbeispiel:
@@ -12,7 +15,7 @@
  * Christian Pothmann, 2.6.2013
  */
 public class Stoppuhr
-{ 
+{
     // Attribute
     private long startZeit, stoppZeit;
 

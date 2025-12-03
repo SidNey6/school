@@ -1,4 +1,5 @@
 import java.util.Random;
+import Common.List;
 
 public class Woerterraetsel {
     private Character[] raetsel;
@@ -90,7 +91,7 @@ public class Woerterraetsel {
     }
     
     private Character[] generiereRaetsel(String pLoesung) {
-        if(pLoesung == null) return null xcx, 
+        if(pLoesung == null) return null;
         
         Character[] neuesRaetsel = new Character[pLoesung.length()];
         Random r = new Random();

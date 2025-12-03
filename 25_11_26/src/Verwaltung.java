@@ -2,6 +2,7 @@
 // cd /workspaces/school/26_11_25 && javac *.java
 // java -cp . Verwaltung
 
+import Common.Stoppuhr;
 
 public class Verwaltung {
     
@@ -120,7 +121,7 @@ public class Verwaltung {
     public static void main(String[] args) {
         Stoppuhr stoppuhr = new Stoppuhr();
         Verwaltung verwaltung = new Verwaltung();
-        verwaltung.lkw.beladeLkw(20000000);
+        verwaltung.lkw.beladeLkw(20);
         verwaltung.beladePakete();
         verwaltung.druckeGabelstaplerStatus();
         stoppuhr.stopp();
