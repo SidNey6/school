@@ -1,3 +1,5 @@
+package c25_11_26;
+
 import _shared.Stack;
 
 public class LKW {

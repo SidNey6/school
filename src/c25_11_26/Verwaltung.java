@@ -1,3 +1,6 @@
+
+package c25_11_26;
+
 // Zum Ausführen:
 // cd /workspaces/school/26_11_25 && javac *.java
 // java -cp . Verwaltung

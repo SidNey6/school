@@ -1,3 +1,5 @@
+package c25_10_28;
+
 public class Potenz {
     private int basis;
     private int exponent;

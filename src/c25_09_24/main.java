@@ -1,7 +1,7 @@
 package c25_09_24;
 
 public class main {
- 
+
     public int findeAlleUngeloestenFaelle(){
         int counter;
         for (faelle.toFirst();faelle.hasAccess(); faelle.next()) {

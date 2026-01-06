@@ -1,3 +1,5 @@
+package c25_09_09;
+
 public class main {
     public static void main(String[] args) {
         System.out.println("Verwaltung:");

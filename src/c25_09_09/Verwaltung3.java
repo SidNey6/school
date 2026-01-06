@@ -1,3 +1,5 @@
+package c25_09_09;
+
 // VERSION 3 - Array in seiner Länge anpassen
 /*Das Array soll immer nur so groß sein, wie
 es tatsächlich Kurs-Objekte enthält*/

@@ -1,3 +1,5 @@
+package c25_09_09;
+
 public class Kurs {
     private String beschreibung;
 
