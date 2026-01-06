@@ -1,0 +1,15 @@
+# IDE-spezifisch
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Kompilate
+*.class
+bin/
+out/
+
+# OS-spezifisch
+.DS_Store
