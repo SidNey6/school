@@ -7,11 +7,14 @@ public class Geräusch implements ComparableContent<Geräusch> {
 
     private String name;
     private int lautstärke;
-    //TODO: Weitere Attribute hinzufügen (siehe Excel-Tabelle)
+    private boolean eigeneMessung;
+    private String Urheber;
 
-    public Geräusch(String pName, int pLautstärke){
+    public Geräusch(String pName, int pLautstärke, boolean pEigeneMessung, String pUrheber) {
         name = pName;
         lautstärke = pLautstärke;
+        eigeneMessung = pEigeneMessung;
+        Urheber = pUrheber;
     }
 
     public String gibName(){
@@ -24,18 +27,32 @@ public class Geräusch implements ComparableContent<Geräusch> {
 
 
     public boolean isLess(Geräusch pContent){
-        return lautstärke < pContent.gibLautstärke();
+        return this.lautstärke < pContent.gibLautstärke();
     }
     public boolean isEqual(Geräusch pContent){
-        // TODO: wenn lautstärke gleich; lexiographisch weiter vergleichen
-        return lautstärke == pContent.gibLautstärke();
+        return this.lautstärke == pContent.gibLautstärke();
     }
     public boolean isGreater(Geräusch pContent){
-        return lautstärke > pContent.gibLautstärke();
+        if (lautstärke == pContent.gibLautstärke()) {
+            return this.name.compareTo(pContent.gibName()) > 0; // keine Ahnung wie compareTo funktioniert; aber wenn objekt lexikographisches größer ist als pContent, dann kommt da was positives raus
+        }
+        return this.lautstärke > pContent.gibLautstärke();
     }
-    public String toString() {
-        String erg = "";
-        //TODO: DEIN CODE HIER
-        return erg;
+
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getLautstärke(){
+        return this.lautstärke;
+    }
+
+    public boolean isEigeneMessung() {
+        return this.eigeneMessung;
+    }
+
+    public String getUrheber() {
+        return this.Urheber;
     }
 }
