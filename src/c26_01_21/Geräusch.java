@@ -8,21 +8,38 @@ public class Geräusch implements ComparableContent<Geräusch> {
     private String name;
     private int lautstärke;
     private boolean eigeneMessung;
+    private Date datum;
     private String Urheber;
 
-    public Geräusch(String pName, int pLautstärke, boolean pEigeneMessung, String pUrheber) {
-        name = pName;
-        lautstärke = pLautstärke;
-        eigeneMessung = pEigeneMessung;
-        Urheber = pUrheber;
+    public Geräusch(String pName, int pLautstärke, Date pDatum, String pUrheber) {
+        this.name = pName;
+        if(pDatum != null) {
+            this.eigeneMessung = True;
+        } else {
+            this.eigeneMessung = False;
+        }
+        this.datum = pDatum;
+        this.Urheber = pUrheber;
     }
 
     public String gibName(){
-        return name;
+        return this.name;
     }
 
     public int gibLautstärke(){
-        return lautstärke;
+        return this.lautstärke;
+    }
+
+    public Date gibDatum(){
+        return this.datum;
+    }
+
+    public String gibUrheber(){
+        return this.Urheber;
+    }
+
+    public boolean isEigeneMessung(){
+        return this.eigeneMessung;
     }
 
 
@@ -37,22 +54,5 @@ public class Geräusch implements ComparableContent<Geräusch> {
             return this.name.compareTo(pContent.gibName()) > 0; // keine Ahnung wie compareTo funktioniert; aber wenn objekt lexikographisches größer ist als pContent, dann kommt da was positives raus
         }
         return this.lautstärke > pContent.gibLautstärke();
-    }
-
-
-    public String getName() {
-        return this.name;
-    }
-
-    public int getLautstärke(){
-        return this.lautstärke;
-    }
-
-    public boolean isEigeneMessung() {
-        return this.eigeneMessung;
-    }
-
-    public String getUrheber() {
-        return this.Urheber;
     }
 }
