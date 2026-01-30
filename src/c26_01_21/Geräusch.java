@@ -2,6 +2,7 @@ package c26_01_21;
 
 import _shared.ComparableContent;
 import java.util.Date;
+import java.time.LocalDate;
 
 //Ein Objekt vom Typ Geräusch kann mit einem Objekt vom Typ Geräusch verglichen werden
 public abstract class Geräusch implements ComparableContent<Geräusch> {
@@ -9,10 +10,10 @@ public abstract class Geräusch implements ComparableContent<Geräusch> {
     private String name;
     private int lautstärke;
     private boolean eigeneMessung;
-    private Date datum;
+    private LocalDate datum;
     private String Urheber;
 
-    public Geräusch(String pName, int pLautstärke, Date pDatum, String pUrheber) {
+    public Geräusch(String pName, int pLautstärke, LocalDate pDatum, String pUrheber) {
         this.name = pName;
         this.lautstärke = pLautstärke;
         if(pDatum != null) {
@@ -32,7 +33,7 @@ public abstract class Geräusch implements ComparableContent<Geräusch> {
         return this.lautstärke;
     }
 
-    public Date gibDatum(){
+    public LocalDate gibDatum(){
         return this.datum;
     }
 
