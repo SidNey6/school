@@ -9,7 +9,6 @@ public class Verwaltung {
 
     public Verwaltung(){
         baum = new BinarySearchTree<Geräusch>();
-        anzahlElemente = 0;
     }
 
     public Geräusch suche(Geräusch pGeräusch){
@@ -36,11 +35,11 @@ public class Verwaltung {
         List<Geräusch> ergebnis = new List<Geräusch>();
 
         if(!pBaum.isEmpty()) {
-            ergebnis.concat(gibAlleGeräuscheAbRekursiv(pBaum.getLeftTree(), pDezibel)))
+            ergebnis.concat(gibAlleGeräuscheAbRekursiv(pBaum.getLeftTree(), pDezibel));
             if(pBaum.getContent().gibLautstärke() >= pDezibel) {
-                ergebis.append(pBaum.getCOntent())
+                ergebnis.append(pBaum.getContent());
             }
-            ergbenis.concat(gibAlleGeräuscheAbRekursiv(pBaum.getRightTree(), pDezibel))
+            ergebnis.concat(gibAlleGeräuscheAbRekursiv(pBaum.getRightTree(), pDezibel));
             return ergebnis;
         }
         return ergebnis;
