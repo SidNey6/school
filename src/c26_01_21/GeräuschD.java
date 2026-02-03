@@ -1,14 +1,13 @@
 package c26_01_21;
 
 import _shared.ComparableContent;
-import java.util.Date;
-import java.util.LocalDate;
+import java.time.LocalDate;
 
 public class GeräuschD extends Geräusch {
 
     private String typ;
 
-    public GeräuschD(String pName, int pLautstärke, Date pDatum, String pUrheber) {
+    public GeräuschD(String pName, int pLautstärke, LocalDate pDatum, String pUrheber) {
         super(pName, pLautstärke, pDatum, pUrheber);
         this.typ = "D";
     }
@@ -18,12 +17,12 @@ public class GeräuschD extends Geräusch {
     }
 
     public boolean isLess(Geräusch pContent){
-        return this.gibDatum().toLocalDate().compareTo(pContent.gibDatum().toLocalDate()) < 0;
+        return this.gibDatum().isAfter(pContent.gibDatum()) ;
     }
     public boolean isEqual(Geräusch pContent){
-        return this.gibDatum().toLocalDate().compareTo(pContent.gibDatum().toLocalDate()) == 0;
+        return this.gibDatum().isEqual(pContent.gibDatum());
     }
     public boolean isGreater(Geräusch pContent){
-        return this.gibDatum().toLocalDate().compareTo(pContent.gibDatum().toLocalDate()) > 0;
+        return this.gibDatum().isBefore(pContent.gibDatum());
     }
 }

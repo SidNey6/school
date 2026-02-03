@@ -1,13 +1,13 @@
 package c26_01_21;
 
 import _shared.ComparableContent;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class GeräuschL extends Geräusch {
 
     private String typ;
 
-    public GeräuschL(String pName, int pLautstärke, Date pDatum, String pUrheber) {
+    public GeräuschL(String pName, int pLautstärke, LocalDate pDatum, String pUrheber) {
         super(pName, pLautstärke, pDatum, pUrheber);
         typ = "L";
     }

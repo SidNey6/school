@@ -1,13 +1,13 @@
 package c26_01_21;
 
 import _shared.ComparableContent;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class GeräuschN extends Geräusch {
 
     private String typ;
 
-    public GeräuschN(String pName, int pLautstärke, Date pDatum, String pUrheber) {
+    public GeräuschN(String pName, int pLautstärke, LocalDate pDatum, String pUrheber) {
         super(pName, pLautstärke, pDatum, pUrheber);
         typ = "N";
     }
@@ -25,4 +25,5 @@ public class GeräuschN extends Geräusch {
     public boolean isGreater(Geräusch pContent){
         return this.gibName().compareTo(pContent.gibName()) > 0;
     }
+    
 }
