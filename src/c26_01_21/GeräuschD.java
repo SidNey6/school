@@ -17,12 +17,21 @@ public class GeräuschD extends Geräusch {
     }
 
     public boolean isLess(Geräusch pContent){
-        return this.gibDatum().isAfter(pContent.gibDatum()) ;
+        if(this.gibDatum().isEqual(pContent.gibDatum())) {
+            return this.gibName().compareToIgnoreCase(pContent.gibName()) < 0;;
+        }
+        return  this.gibDatum().isBefore(pContent.gibDatum());;
     }
     public boolean isEqual(Geräusch pContent){
-        return this.gibDatum().isEqual(pContent.gibDatum());
+        if(this.gibDatum().isEqual(pContent.gibDatum())) {
+            return this.gibName().equalsIgnoreCase(pContent.gibName());
+        }
+        return false;
     }
     public boolean isGreater(Geräusch pContent){
-        return this.gibDatum().isBefore(pContent.gibDatum());
+        if(this.gibDatum().isEqual(pContent.gibDatum())) {
+            return this.gibName().compareToIgnoreCase(pContent.gibName()) > 0;
+        }
+        return this.gibDatum().isAfter(pContent.gibDatum());
     }
 }

@@ -22,7 +22,7 @@ public class Verwaltung {
         this.typ = pTyp;
         BinarySearchTree<Geräusch> neuerBaum = new BinarySearchTree<Geräusch>();
 
-        while(baum.getContent() != null) {
+        while(!baum.isEmpty()) {
             neuerBaum.insert(transformiereGeräusch(baum.getContent(), pTyp));
             baum.remove(baum.getContent());
         }
@@ -75,7 +75,7 @@ public class Verwaltung {
     public List<Geräusch> gibAlleGeräuscheAbRekursiv(BinarySearchTree<Geräusch> pBaum, int pDezibel) {
         List<Geräusch> ergebnis = new List<Geräusch>();
 
-        if(!pBaum.isEmpty()) {
+        if(baum.getContent() != null) {
             ergebnis.concat(gibAlleGeräuscheAbRekursiv(pBaum.getLeftTree(), pDezibel));
             if(pBaum.getContent().gibLautstärke() >= pDezibel) {
                 ergebnis.append(pBaum.getContent());

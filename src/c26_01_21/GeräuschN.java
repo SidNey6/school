@@ -17,13 +17,15 @@ public class GeräuschN extends Geräusch {
     }
 
     public boolean isLess(Geräusch pContent){
-        return this.gibName().compareTo(pContent.gibName()) < 0;
+        return this.gibName().compareToIgnoreCase(pContent.gibName()) < 0;
     }
+    
     public boolean isEqual(Geräusch pContent){
-        return this.gibName().equals(pContent.gibName());
+        return this.gibName().equalsIgnoreCase(pContent.gibName());
     }
+
     public boolean isGreater(Geräusch pContent){
-        return this.gibName().compareTo(pContent.gibName()) > 0;
+        return this.gibName().compareToIgnoreCase(pContent.gibName()) > 0;
     }
     
 }
