@@ -53,25 +53,36 @@ public class Verwaltung {
 
     }
     
-    public List<List<String>> gibAllePfade(char pNameStart, char pNameEnde) {
+    public List<List<Vertex>> gibAllePfade(char pNameStart, char pNameEnde) {
         Vertex startVertex = graph.getVertex(pNameStart+"");
         Vertex endVertex = graph.getVertex(pNameEnde+"");
-        List<List<String>> ergebnis = new List<List<String>>();
+        List<List<Vertex>> ergebnis = new List<List<Vertex>>();
 
-        List<Vertex> neighbours = graph.getNeighbours(startVertex);
-        for(neighbours.toFirst(); neighbours.hasAccess(); neighbours.next()) {
-            List<List<String>> ergebnisse = gibAllePfade(neighbours.getContent().getID().charAt(0), pNameEnde);
-            for(ergebnisse.toFirst(); ergebnisse.hasAccess(); ergebnisse.next()) {
-                ergebnis.append(ergebnisse.getContent());
-            }
+        List<Vertex> nachbarn = startVertex.getNeighbours();
+        ergebnis.toFirst();
+        do {
+            ergebnis.next();
+
+
+
+        } while (ergebnis.hasAccess());
+        for(nachbarn.toFirst(); nachbarn.hasAccess(); nachbarn.next()) {
+            ergebnis.append(new List<Vertex>());
+            ergebnis.getContent().insert(startVertex);
         }
+
+        
+
+
         return ergebnis;
     }
     public List<String> gibKuerztestenPfad(char pNameStart, char pNameEnde) {
+        /*
         List<List<String>> allePfade = gibAllePfade(pNameStart, pNameEnde);
         List<String> erg = null;
         //DEIN CODE HIER
         return erg;
+        */
     }
 }
  
