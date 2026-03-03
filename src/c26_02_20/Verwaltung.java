@@ -76,5 +76,14 @@ public class Verwaltung {
     public Boolean istInPfad(Vertex pVertex, List<Vertex> pList) {
         
     }
+
+    public int gibAnzahlDerNeuenNachbarn(String pString) {
+        List<Vertex> nachbarn = graph.getVertex(pString).getNeighbours();
+        int i = 0;
+        for(nachbarn.toFirst(), nachbarn.hasAccess(), nachbarn.next()) {
+            i++;
+        }
+        return i-1;
+    }
 }
  
