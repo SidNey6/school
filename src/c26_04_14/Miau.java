@@ -5,7 +5,12 @@ public class Miau {
     private int miauID;
     private List<Benutzer> schnurrer;
 
-    public Miau(String pText, int pMiauID) {}
+    public Miau(String pText, int pMiauID) {
+        text = pText;
+        miauID = pMiauID;
+        schnurrer = new List<Benutzer>();
+    }
+
     public String gibText() {
         return text;
     }
@@ -18,7 +23,12 @@ public class Miau {
         return schnurrer;
     }
 
-    public int liefereAnzahlSchurrer() {}
+    public int liefereAnzahlSchurrer() {
+        int counter = 0;
+        for(schnurrer.toFirst(), schnurrer.hasAccess(), schnurrer.next()) {
+            counter++;
+        }
+    }
 
     public void fuegeSchnurrerHinzu(Benutzer pBenutzer) {
         schnurrer.append(pBenutzer)

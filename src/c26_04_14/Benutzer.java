@@ -10,7 +10,12 @@ public class Benutzer {
     private List<Miau> miaus;
     private List<Benutzer> freunde;    
 
-    public Benutzer(String pName, String pPass) {}
+    public Benutzer(String pName, String pPass) {
+        name = pName;
+        passwort = pPass;
+        aktIP = null;
+        aktPort = -1;
+    }
 
     public String gibName() {
         return name;
@@ -24,9 +29,24 @@ public class Benutzer {
         return aktPort;
     }
 
-    public void einloggen(String pAktIP, int pAktPort, String pPass) {}
-    public void ausloggen() {}
-    public boolean istEingeloggt() {}
+    public void einloggen(String pAktIP, int pAktPort, String pPass) {
+        if(pPass.equals(passwort)) {
+            aktIP = pAktIP;
+            aktPort = pAktPort;
+        } else {
+            System.out.println("einloggen nicht erfolgreich")
+        }
+    }
+    public void ausloggen() {
+        aktIP = null;
+        aktPort = -1;
+    }
+
+    public boolean istEingeloggt() {
+        if(aktIP != null) {
+            if(aktPort > 0)
+        }
+    }
     public List<Miau> gibMiaus() {
         return miaus;
     }
