@@ -33,10 +33,9 @@ public class Benutzer {
         if(pPass.equals(passwort)) {
             aktIP = pAktIP;
             aktPort = pAktPort;
-        } else {
-            System.out.println("einloggen nicht erfolgreich")
         }
     }
+    
     public void ausloggen() {
         aktIP = null;
         aktPort = -1;
@@ -44,17 +43,28 @@ public class Benutzer {
 
     public boolean istEingeloggt() {
         if(aktIP != null) {
-            if(aktPort > 0)
+            if(aktPort >= 0 && aktPort <= 65535 ) {
+                return true;
+            }
         }
+        return false;
     }
     public List<Miau> gibMiaus() {
         return miaus;
     }
 
-    public void fuegeFreundeHinzu(Benutzer, pBenutzer) {
-        freunde.append(pBenutzer);
+    public void fuegeFreundeHinzu(Benutzer pBenutzer) {
+        if(!beinhaltet(freunde, pBenutzer)) {
+            freunde.append(pBenutzer);
+        }
     }
 
-    public boolean beinhaltet(List<Benutzer> pListe, Benutzer pBenutzer) {}
-
+    public boolean beinhaltet(List<Benutzer> pListe, Benutzer pBenutzer) {
+        for(pListe.toFirst(), pListe.hasAccess(), pList.next()) {
+            if(pListe.getContent() == pBenutzer) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

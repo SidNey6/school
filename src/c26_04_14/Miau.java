@@ -31,7 +31,7 @@ public class Miau {
     }
 
     public void fuegeSchnurrerHinzu(Benutzer pBenutzer) {
-        schnurrer.append(pBenutzer)
+        schnurrer.append(pBenutzer);
     }
 
 }
