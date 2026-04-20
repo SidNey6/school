@@ -1,3 +1,4 @@
+package c26_04_14;
 import _shared.List;
 
 public class Benutzer {
@@ -60,7 +61,7 @@ public class Benutzer {
     }
 
     public boolean beinhaltet(List<Benutzer> pListe, Benutzer pBenutzer) {
-        for(pListe.toFirst(), pListe.hasAccess(), pList.next()) {
+        for(pListe.toFirst(); pListe.hasAccess(); pListe.next()) {
             if(pListe.getContent() == pBenutzer) {
                 return true;
             }

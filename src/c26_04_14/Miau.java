@@ -1,3 +1,4 @@
+package c26_04_14;
 import _shared.List;
 
 public class Miau {
@@ -25,9 +26,10 @@ public class Miau {
 
     public int liefereAnzahlSchurrer() {
         int counter = 0;
-        for(schnurrer.toFirst(), schnurrer.hasAccess(), schnurrer.next()) {
+        for(schnurrer.toFirst(); schnurrer.hasAccess(); schnurrer.next()) {
             counter++;
         }
+        return counter;
     }
 
     public void fuegeSchnurrerHinzu(Benutzer pBenutzer) {
