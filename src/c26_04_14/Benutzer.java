@@ -29,6 +29,10 @@ public class Benutzer {
     public int gibAktPort() {
         return aktPort;
     }
+    
+    public List<Benutzer> gibFreunde() {
+        return freunde;
+    }
 
     public void einloggen(String pAktIP, int pAktPort, String pPass) {
         if(pPass.equals(passwort)) {
