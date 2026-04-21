@@ -5,23 +5,20 @@ import _shared.List;
 public class ChatCatzServer extends Server {
 
     private List<Benutzer> benutzer;
-    private List<String[]> meows;
+    private List<Miau> meows;
 
     public ChatCatzServer(int pPort) {
         super(pPort);
-        List<Benutzer> benutzer = new List<Benutzer>();
-        List<String[]> moews = new List<String[]>();
+        benutzer = new List<Benutzer>();
+        meows = new List<Miau>();
     }
 
-    /*
-
-    WICHTIG:
-    ÜBERPRÜFE IPS/PORTS GENUTZT BEI SEND();
-
-     */
-
     private void bearbeiteADDFRIEND(Benutzer pBenutzer, String pMessage) {
-        String freund = pMessage.substring(pMessage.indexOf(" "), pMessage.length());
+        if(pMessage.indexOf(" ") < 0) {
+            send(pBenutzer.gibAktIP(), pBenutzer.gibAktPort(), "-ERR Unbekannt");
+            return;
+        }
+        String freund = pMessage.substring(pMessage.indexOf(" ") + 1).trim();
         Benutzer freundBenutzer = null;
         for(benutzer.toFirst(); benutzer.hasAccess() && freundBenutzer == null; benutzer.next()){
             if(benutzer.getContent().gibName().equals(freund)){
@@ -33,7 +30,7 @@ public class ChatCatzServer extends Server {
             send(pBenutzer.gibAktIP(), pBenutzer.gibAktPort(), msg);
         }
         else {
-            freundBenutzer.fuegeFreundHinzu(pBenutzer);
+            freundBenutzer.fuegeFreundeHinzu(pBenutzer);
             String msg = "+OK";
             send(pBenutzer.gibAktIP(), pBenutzer.gibAktPort(), msg);
         }
@@ -41,22 +38,27 @@ public class ChatCatzServer extends Server {
 
     private void bearbeiteMEOW(Benutzer pBenutzer, String pMessage) {
         send(pBenutzer.gibAktIP(), pBenutzer.gibAktPort(), "+OK");
-        String[] tString = new String[3];
-        tString[0] = (Integer.parseInt(meows.toLast().getContent()[0]) + 1) + "";
-        tString[1] = pMessage;
-        meows.append(tString);
+        int neueMiauID = 1;
+        if(!meows.isEmpty()) {
+            meows.toLast();
+            neueMiauID = meows.getContent().gibMiauID() + 1;
+        }
+        String text = pMessage.substring(pMessage.indexOf(" ") + 1);
+        Miau neueMiau = new Miau(text, neueMiauID);
+        meows.append(neueMiau);
 
         List<Benutzer> freunde = pBenutzer.gibFreunde();
         for(freunde.toFirst(); freunde.hasAccess(); freunde.next()) {
-            send(freunde.getContent().gibAktIP(), freunde.getContent().gibAktPort(), tString[0] + "|" + tString[1] + "|" + pBenutzer.gibName());
+            send(freunde.getContent().gibAktIP(), freunde.getContent().gibAktPort(), neueMiau.gibMiauID() + "|" + neueMiau.gibText() + "|" + pBenutzer.gibName());
         }
-        send(pBenutzer.gibAktIP(), pBenutzer.gibAktPort(), tString[0] + "|" + tString[1] + "|" + pBenutzer.gibName());
+        send(pBenutzer.gibAktIP(), pBenutzer.gibAktPort(), neueMiau.gibMiauID() + "|" + neueMiau.gibText() + "|" + pBenutzer.gibName());
     }
 
     private void bearbeitePURR(Benutzer pBenutzer, String pMessage) {
+        int gesuchteMiauID = Integer.parseInt(pMessage.substring(pMessage.indexOf(" ") + 1));
         for(meows.toFirst(); meows.hasAccess(); meows.next()) {
-            if(meows.getContent()[0] == Integer.parseInt(pMessage)) {
-                meows.getContent()[3] =  (Integer.parseInt(meows.getContent()[3]) + 1) + "";
+            if(meows.getContent().gibMiauID() == gesuchteMiauID) {
+                meows.getContent().fuegeSchnurrerHinzu(pBenutzer);
                 return;
             }
         }
@@ -64,7 +66,14 @@ public class ChatCatzServer extends Server {
     }
 
     private void bearbeitePURRSOF(Benutzer pBenutzer, String pMessage) {
-
+        int gesuchteMiauID = Integer.parseInt(pMessage.substring(pMessage.indexOf(" ") + 1));
+        for(meows.toFirst(); meows.hasAccess(); meows.next()) {
+            if(meows.getContent().gibMiauID() == gesuchteMiauID) {
+                send(pBenutzer.gibAktIP(), pBenutzer.gibAktPort(), "+OK " + meows.getContent().liefereAnzahlSchurrer());
+                return;
+            }
+        }
+        send(pBenutzer.gibAktIP(), pBenutzer.gibAktPort(), "-ERR unbekannt");
     }
 
     private void bearbeiteUSERS(Benutzer pBenutzer) {
@@ -85,16 +94,16 @@ public class ChatCatzServer extends Server {
         String msg = "";
         if(!isConnectedTo(pClientIP, pClientPort)) {
             msg = "-ERR Nicht eingeloggt";
-            send(pClietIP, pClientPort, msg);
+            send(pClientIP, pClientPort, msg);
         }
         else if(pMessage == null || pMessage.equals("")) {
             msg = "-ERR Keine Nachricht empfangen";
-            send(pClietIP, pClientPort, msg);
+            send(pClientIP, pClientPort, msg);
         }
         else {
             Benutzer aktBenutzer = null;
             for(benutzer.toFirst(); benutzer.hasAccess() && aktBenutzer == null; benutzer.next()) {
-                if(benutzer.getContent().gibAktIP().equals(pClientIP) && benutzer.getContent().gibAktPort() == Integer.parseInt(pClientPort)) {
+                if(benutzer.getContent().gibAktIP().equals(pClientIP) && benutzer.getContent().gibAktPort() == pClientPort) {
                     aktBenutzer = benutzer.getContent();
                     break;
                 }
@@ -119,13 +128,20 @@ public class ChatCatzServer extends Server {
                         break;
                     default:
                         msg = "-ERR Unbekannter Befehl";
-                        send(pClietIP, pClientPort, msg);
+                        send(pClientIP, pClientPort, msg);
                 }
             }
         }
     }
 
     public void processClosingConnection(String pClientIP, int pClientPort) {
-    
+        for(benutzer.toFirst(); benutzer.hasAccess(); benutzer.next()) {
+            if(benutzer.getContent().gibAktIP() != null
+                    && benutzer.getContent().gibAktIP().equals(pClientIP)
+                    && benutzer.getContent().gibAktPort() == pClientPort) {
+                benutzer.getContent().ausloggen();
+                return;
+            }
+        }
     }
 }

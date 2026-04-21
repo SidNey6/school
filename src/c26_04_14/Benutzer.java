@@ -16,6 +16,8 @@ public class Benutzer {
         passwort = pPass;
         aktIP = null;
         aktPort = -1;
+        miaus = new List<Miau>();
+        freunde = new List<Benutzer>();
     }
 
     public String gibName() {
@@ -59,12 +61,18 @@ public class Benutzer {
     }
 
     public void fuegeFreundeHinzu(Benutzer pBenutzer) {
+        if(pBenutzer == null) {
+            return;
+        }
         if(!beinhaltet(freunde, pBenutzer)) {
             freunde.append(pBenutzer);
         }
     }
 
     public boolean beinhaltet(List<Benutzer> pListe, Benutzer pBenutzer) {
+        if(pListe == null || pBenutzer == null) {
+            return false;
+        }
         for(pListe.toFirst(); pListe.hasAccess(); pListe.next()) {
             if(pListe.getContent() == pBenutzer) {
                 return true;
