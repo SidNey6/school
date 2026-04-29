@@ -205,5 +205,18 @@ public class ChatCatzServer extends Server {
         ChatCatzServer server = new ChatCatzServer(port);
         System.out.println("Server läuft.");
         System.out.println("Testnutzer: 'alice|pass123', 'bob|pass456', 'charlie|pass789'");
+        System.out.println("Tippe 'exit' oder 'quit' um den Server zu beenden.");
+
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        while(true) {
+            String input = scanner.nextLine();
+            if(input.equalsIgnoreCase("exit") || input.equalsIgnoreCase("quit")) {
+                server.close();
+                break;
+            }
+        }
+        scanner.close();
+        System.out.println("Server beendet.");
+        System.exit(0);
     }
 }
