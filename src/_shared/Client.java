@@ -85,9 +85,9 @@ public abstract class Client{
 
     private MessageHandler(String pServerIP, int pServerPort) {
       socketWrapper = new SocketWrapper(pServerIP, pServerPort);
-      start();
       if(socketWrapper.socket != null)
         active = true;
+      start();
     }
 
     public void run(){

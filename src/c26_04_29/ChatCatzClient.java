@@ -17,24 +17,30 @@ public class ChatCatzClient extends Client {
     }
 
     public void processMessage(String pMessage) {
-        String command = pMessage.substring(0, pMessage.indexOf(" "));
-        String[] messageArray = pMessage.split(" ");
+        int spaceIndex = pMessage.indexOf(" ");
+        String command = spaceIndex >= 0 ? pMessage.substring(0, spaceIndex) : pMessage;
+        String payload = spaceIndex >= 0 ? pMessage.substring(spaceIndex + 1) : "";
+        String[] messageArray = pMessage.split("\\|");
 
         switch (command) {
             case "+OK":
-                bearbeiteOK(pMessage.substring(pMessage.indexOf(" "), pMessage.length()));
+                bearbeiteOK(payload);
                 break;
             case "-ERR":
-                bearbeiteERR(pMessage.substring(pMessage.indexOf(" "), pMessage.length()));
+                bearbeiteERR(payload);
                 break;
             case "MEOWING":
-                bearbeiteMEOWING(Integer.parseInt(messageArray[1]), messageArray[2], messageArray[3]);
+                if(messageArray.length >= 4) {
+                    bearbeiteMEOWING(Integer.parseInt(messageArray[1]), messageArray[2], messageArray[3]);
+                }
                 break;
             case "PURRS":
-                bearbeitePURRS(Integer.parseInt(messageArray[1]), Integer.parseInt(messageArray[2]));
+                if(messageArray.length >= 3) {
+                    bearbeitePURRS(Integer.parseInt(messageArray[1]), Integer.parseInt(messageArray[2]));
+                }
                 break;
             case "USERLIST":
-                bearbeiteUSERLIST(pMessage.substring(pMessage.indexOf(" "), pMessage.length()));
+                bearbeiteUSERLIST(payload);
                 break;
         }
     }
@@ -109,7 +115,7 @@ public class ChatCatzClient extends Client {
             switch (befehl) {
                 case "LOGIN":
                     if (parts.length > 1) {
-                        String[] creds = parts[1].split(" ");
+                        String[] creds = parts[1].split("\\|");
                         if (creds.length == 2) {
                             client.sendeLOGIN(creds[0], creds[1]);
                         } else {
@@ -149,6 +155,7 @@ public class ChatCatzClient extends Client {
                     client.sendUSERS();
                     break;
                 case "EXIT":
+                    client.close();
                     running = false;
                     break;
                 default:

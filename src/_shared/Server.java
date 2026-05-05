@@ -40,8 +40,8 @@ public abstract class Server{
     public NewConnectionHandler(int pPort){
       try{
         serverSocket = new ServerSocket(pPort);
-        start();
         active = true;
+        start();
       } catch (Exception e) {
         serverSocket = null;
         active = false;
@@ -148,8 +148,8 @@ public abstract class Server{
     private ClientMessageHandler(Socket pClientSocket) {
       socketWrapper = new ClientSocketWrapper(pClientSocket);
       if(pClientSocket!=null) {
-        start();
         active = true;
+        start();
       } else {
         active = false;
       }
